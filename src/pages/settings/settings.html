@@ -1,0 +1,21 @@
+<ion-header>
+  <ion-navbar color="blue" >
+    <ion-title> {{ 'Settings' | translate }}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding center text-center class="background">
+
+    <div id="logo">  
+        <img  src="/assets/imgs/LAN(2).png"/>
+  </div>
+  <ion-list>
+    <ion-item>
+      <ion-label> {{'Language' | translate}} </ion-label>
+      <ion-select [(ngModel)]="lang" (ionChange)="onChangeLanguage()">
+        <ion-option value="en"> {{'English' | translate}}</ion-option>
+        <ion-option value="ar"> {{'Arabic' | translate}} </ion-option>
+      </ion-select>
+    </ion-item>
+  </ion-list> 
+</ion-content>

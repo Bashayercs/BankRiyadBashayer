@@ -1,0 +1,7 @@
+{
+  "name": "BankRiyadBashayer",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "ionic-angular"
+}

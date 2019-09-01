@@ -1,0 +1,20 @@
+{
+"Login":"Login",
+"Password":"Password",
+"Remerber me":"Remerber me",
+"Language":"Language",
+"English":"English",
+"Arabic":"Arabic",
+"Log in":"Log in",
+"Password is wrong ,Try again":" Password is wrong ,Try again " ,
+"Home":"Home",
+"username is wrong ,Try again.":"username is wrong ,Try again.",
+"Your last login ":"Your last login ",
+"Settings":" Settings",
+  "username": "Username",
+  "Capture Photo":"CapturePhoto",
+  "Menu":"Menu",
+  "Logout":"Log out",
+  "side":"left"
+
+}
