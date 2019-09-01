@@ -11,21 +11,23 @@
     <img src="/assets/imgs/logo.png" />
   </div>
   <ion-list>
-<br>
-<br>
-<br> 
+    <br>
+    <br>
+    <br>
     <ion-item>
       <ion-icon name="person" item-start style="color: #000000"></ion-icon>
-      <ion-input placeholder="{{'username' | translate}}" type="text" [(ngModel)]="username" name="username" required></ion-input>
-    </ion-item>
-<br> 
- 
-    <ion-item>
-      <ion-icon name="lock" item-start style="color: #000000"></ion-icon>
-      <ion-input placeholder="{{'Password' | translate}}" type="Password" [(ngModel)]="password" name="password" required>
+      <ion-input placeholder="{{'username' | translate}}" type="text" [(ngModel)]="username" name="username" required>
       </ion-input>
     </ion-item>
-    <br> 
+    <br>
+
+    <ion-item>
+      <ion-icon name="lock" item-start style="color: #000000"></ion-icon>
+      <ion-input placeholder="{{'Password' | translate}}" type="Password" [(ngModel)]="password" name="password"
+        required>
+      </ion-input>
+    </ion-item>
+    <br>
 
     <ion-item>
       <ion-label> {{'Remerber me' | translate}} </ion-label>
@@ -42,9 +44,9 @@
         <ion-option value="ar"> {{'Arabic' | translate}} </ion-option>
       </ion-select>
     </ion-item>
-  </ion-list> 
+  </ion-list>
 
-  <p *ngIf="error"  > {{ error }} </p>
-  <button id="colerbut" ion-button (click)="onLogin()" >{{'Log in' | translate}} </button>
+  <p *ngIf="error"> {{ error }} </p>
+  <button id="colerbut" ion-button (click)="onLogin()">{{'Log in' | translate}} </button>
 
 </ion-content>

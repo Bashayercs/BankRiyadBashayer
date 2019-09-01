@@ -1,23 +1,22 @@
-
 {
-"Login":"تسجيل الدخول ",
-"Password":"كلمة المرور ",
-"Remerber me":"تذكرنى ",
-"Language":"اللغة",
-"English":"الإنجليزية",
-"Arabic":"عربي ",
-"Log in":"دخول",
-"Password is wrong ,Try again":" كلمة المرور غير صحيحة, حاولة مرة اخري " ,
-"username is wrong ,Try again.":"اسم المستخدم غير صحيحة حاولة مرة اخري ",
-"Home":"الصفحة الرئسية",
-"Your last login ":" اخر تسجيل دخول  ",
-"Settings":" الإعدادات",
-"Capture Photo":"التقاط الصور" ,
-  "username" : "اسم المستخدم",
-  "Menu":"القائمة",
-  "Logout":"تسجيل خروج ",
-  "side":"right",
-  "wrong_username":"الاسم غير صحيصح "
+  "Login": "تسجيل الدخول ",
+  "Password": "كلمة المرور ",
+  "Remerber me": "تذكرنى ",
+  "Language": "اللغة",
+  "English": "الإنجليزية",
+  "Arabic": "عربي ",
+  "Log in": "دخول",
+  "Password is wrong ,Try again": " كلمة المرور غير صحيحة, حاولة مرة اخري ",
+  "username is wrong ,Try again.": "اسم المستخدم غير صحيحة حاولة مرة اخري ",
+  "Home": "الصفحة الرئسية",
+  "Your last login ": " اخر تسجيل دخول  ",
+  "Settings": " الإعدادات",
+  "Capture Photo": "التقاط الصور",
+  "username": "اسم المستخدم",
+  "Menu": "القائمة",
+  "Logout": "تسجيل خروج ",
+  "side": "right",
+  "wrong_username": "الاسم غير صحيصح "
 
 
 }
