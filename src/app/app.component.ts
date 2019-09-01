@@ -3,6 +3,9 @@ import {
   ViewChild
 } from '@angular/core';
 import {
+  Storage
+} from '@ionic/storage';
+import {
   Nav,
   Platform
 } from 'ionic-angular';
@@ -28,7 +31,8 @@ import {
 } from '../pages/Login/Login';
 
 import {
-  TranslateService, LangChangeEvent
+  TranslateService,
+  LangChangeEvent
 } from '@ngx-translate/core';
 
 
@@ -40,68 +44,66 @@ export class MyApp {
 
   //rootPage:any = TabsPage;
 
-  rootPage: any = LoginPage;
+  rootPage: any = null;
   sidePage = "left";
-  pages: Array<{
+  pages: Array < {
     title: string,
     component: any,
     icon: string
 
-  }>;
+  } > ;
 
   constructor(public platform: Platform,
     public statusBar: StatusBar,
     public splashScreen: SplashScreen,
-    public translate: TranslateService
+    public translate: TranslateService,
+    private storage: Storage,
   ) {
-    this.translate.onLangChange.subscribe
-      ((event: LangChangeEvent) => {
-        let element: HTMLElement = document.getElementById("menuSide");
+    this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
+      let element: HTMLElement = document.getElementById("menuSide");
 
-        if (event.lang == "ar") {
-          this.platform.setDir('rtl', true);
-          this.sidePage = "right";
-          this.platform.setLang("ar", true);
+      if (event.lang == "ar") {
+        this.platform.setDir('rtl', true);
+        this.sidePage = "right";
+        this.platform.setLang("ar", true);
 
-        }
-        else {
-          this.platform.setDir('ltr', true);
-          this.sidePage = "left";
-          this.platform.setLang("en", true);
+      } else {
+        this.platform.setDir('ltr', true);
+        this.sidePage = "left";
+        this.platform.setLang("en", true);
 
-        }
-        element.setAttribute("side", this.sidePage);
+      }
+      element.setAttribute("side", this.sidePage);
 
-        console.log(this.platform.isRTL);
-        console.log(event.lang);
+      console.log(this.platform.isRTL);
+      console.log(event.lang);
 
 
 
-      })
+    })
 
     this.initializeApp();
 
-    // used for an example of ngFor and navigation
     this.pages = [{
-      title: 'Home',
-      component: HomePage,
-      icon: 'home'
-    },
-    {
-      title: 'Capture Photo',
-      component: CapturePhotoPage,
-      icon: 'md-camera'
-    },
-    {
-      title: 'Settings',
-      component: SettingsPage,
-      icon: 'home'
-    },
-    {
-      title: 'Logout',
-      component: null,
-      icon: 'log-out'
-    }
+        title: 'Home',
+        component: HomePage,
+        icon: 'home'
+      },
+      {
+        title: 'Capture Photo',
+        component: CapturePhotoPage,
+        icon: 'md-camera'
+      },
+      {
+        title: 'Settings',
+        component: SettingsPage,
+        icon: 'home'
+      },
+      {
+        title: 'Logout',
+        component: null,
+        icon: 'log-out'
+      }
 
 
     ];
@@ -110,19 +112,20 @@ export class MyApp {
 
   initializeApp() {
     this.platform.ready().then(() => {
-      console.log("yse");
+      this.storage.ready().then(async () => {
+        let username = await this.storage.get('rememebr');
+        if (username) {
+          this.rootPage = HomePage
+        } else {
+          this.rootPage = LoginPage;
+        }
 
-      let username = localStorage.getItem('rememebr');
-      if (username) {
-        this.rootPage = HomePage
-      }
+        console.log(`AppComponent username`, username);
 
-      console.log(`AppComponent username`, username);
+        this.statusBar.styleDefault();
+        this.splashScreen.hide();
+      });
 
-      // Okay, so the platform is ready and our plugins are available.
-      // Here you can do any higher level native things you might need.
-      this.statusBar.styleDefault();
-      this.splashScreen.hide();
 
       // initialize default language.
       this.translate.setDefaultLang('en');
@@ -135,8 +138,8 @@ export class MyApp {
     console.log('openPage', page);
     if (page.title == 'Logout') {
       console.log('Lougout page clicked');
-      localStorage.removeItem('username');
-      localStorage.removeItem('remember');
+      this.storage.remove('username');
+      this.storage.remove('remember');
       this.nav.setRoot(LoginPage);
     } else if (page.title == 'Home') {
       this.nav.setRoot(HomePage);

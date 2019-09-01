@@ -16,7 +16,8 @@
   "username" : "اسم المستخدم",
   "Menu":"القائمة",
   "Logout":"تسجيل خروج ",
-  "side":"right"
+  "side":"right",
+  "wrong_username":"الاسم غير صحيصح "
 
 
 }

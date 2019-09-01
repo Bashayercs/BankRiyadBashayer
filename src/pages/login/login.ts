@@ -6,9 +6,9 @@ import {
   MenuController,
   NavParams
 } from 'ionic-angular';
-// import {
-//   Storage
-// } from '@ionic/storage';
+import {
+  Storage
+} from '@ionic/storage';
 import {
   HomePage
 } from '../home/home';
@@ -56,8 +56,7 @@ export class LoginPage {
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     public platform: Platform,
-
-   // private storage: Storage,
+    private storage: Storage,
     public alertCtrl: AlertController,
     private menuCtrl: MenuController,
     private toastCtrl: ToastController,
@@ -66,12 +65,6 @@ export class LoginPage {
   }
 
   ionViewDidLoad() {
-    let username = localStorage.getItem('rememebr');
-
-    console.log(`loginpage username`, username);
-
-    console.log('UPDATE ionViewDidLoad LoginPage');
-
     this.menuCtrl.enable(false);
   }
 
@@ -89,7 +82,7 @@ export class LoginPage {
 
       {
         let toast = this.toastCtrl.create({
-          message: "{{'username is wrong ,Try again. '| translate}}",
+          message: this.translate.instant("Password is wrong ,Try again"),
           duration: 3000,
           position: 'bottom'
         });
@@ -106,7 +99,7 @@ export class LoginPage {
     if (foundUser.password !== this.password) {
       {
         let toast = this.toastCtrl.create({
-          message: "{{'Password is wrong ,Try again. '| translate}}",
+          message: this.translate.instant("Password is wrong ,Try again"),
           duration: 3000,
           position: 'bottom'
         });
@@ -121,19 +114,23 @@ export class LoginPage {
 
     // Store user data in localStorage
     console.log(this.rememebr);
-    localStorage.setItem('username', foundUser.username);
-    this.storeLastLogin(foundUser);
-    if (this.rememebr) {
-      console.log("rememebr");
-      localStorage.setItem('rememebr', foundUser.username);
-    }
 
-    // Login the user , an redirect to HomePage
-    this.navCtrl.setRoot(HomePage);
+    this.storage.ready().then(() => {
+      this.storage.set('username', foundUser.username);
+      this.storeLastLogin(foundUser);
+      if (this.rememebr) {
+        console.log("rememebr");
+        this.storage.set('rememebr', foundUser.username);
+      }
+
+      // Login the user , an redirect to HomePage
+      this.navCtrl.setRoot(HomePage);
+    });
+
   }
 
-  private storeLastLogin(user) {
-    let lastLoginString = localStorage.getItem('last_logins_' + user.username);
+  private async storeLastLogin(user) {
+    let lastLoginString = await this.storage.get('last_logins_' + user.username);
     if (lastLoginString == null) {
       lastLoginString = '[]';
     }
@@ -141,18 +138,17 @@ export class LoginPage {
     let lastLogins = JSON.parse(lastLoginString);
     lastLogins.push((new Date()).getTime());
 
-    localStorage.setItem('last_logins_' + user.username, JSON.stringify(lastLogins));
+    this.storage.set('last_logins_' + user.username, JSON.stringify(lastLogins));
   }
 
- 
-  onChangeLanguage(){
-    this.translate.use(this.lang);
-    if(this.lang=="ar"){  
-   this.platform.setDir('rtl', true);
-   }
-   else {
-    this.platform.setDir('ltr', true);
-   }
 
-  } 
+  onChangeLanguage() {
+    this.translate.use(this.lang);
+    if (this.lang == "ar") {
+      this.platform.setDir('rtl', true);
+    } else {
+      this.platform.setDir('ltr', true);
+    }
+
+  }
 }
